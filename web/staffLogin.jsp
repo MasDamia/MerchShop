@@ -1,6 +1,6 @@
 <%-- 
-    Document   : login
-    Created on : 11 Jan 2025, 9:12:52 pm
+    Document   : staffLogin
+    Created on : 12 Jan 2025, 2:03:11 pm
     Author     : masda
 --%>
 
@@ -12,7 +12,7 @@
         <title>Merchandise Shop</title>
     </head>
     <body>
-        <form action="ManagerServlet" method="post">
+        <form action="StaffServlet" method="post">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             <br>
@@ -21,6 +21,9 @@
             <br>
             <button type="submit">Login</button>
         </form>
+        <div>
+            <p>Don't have an account? <a href="register.jsp">Register here.</a></p>
+        </div>
         <p style="color: red;">
             <% String errorMessage = (String) request.getAttribute("errorMessage");%>
             <%= errorMessage != null ? errorMessage : ""%>
