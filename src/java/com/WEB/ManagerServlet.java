@@ -31,7 +31,7 @@ public class ManagerServlet extends HttpServlet{
         if (manager != null) {
             HttpSession session = request.getSession();
             session.setAttribute("manager", manager);
-            response.sendRedirect("inventory.jsp"); // Redirect to inventory dashboard
+            response.sendRedirect("listStock"); // Redirect to inventory dashboard
         } else {
             request.setAttribute("errorMessage", "Invalid username or password");
             request.getRequestDispatcher("login.jsp").forward(request, response);

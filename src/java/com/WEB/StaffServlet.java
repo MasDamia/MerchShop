@@ -37,7 +37,7 @@ public class StaffServlet extends HttpServlet {
         if (staff != null) {
             HttpSession session = request.getSession();
             session.setAttribute("staff", staff);
-            response.sendRedirect("inventory.jsp"); // Redirect to inventory dashboard
+            response.sendRedirect("listStock"); // Redirect to inventory dashboard
         } else {
             request.setAttribute("errorMessage", "Invalid username or password");
             request.getRequestDispatcher("staffLogin.jsp").forward(request, response);

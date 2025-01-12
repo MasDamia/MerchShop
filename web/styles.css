@@ -1,0 +1,14 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+body {
+    background-color: #f7e9dc; /* Beige background */
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-color: #ffc0cb; /* Light pink */
+    padding: 10px;
+    text-align: center;
+}
