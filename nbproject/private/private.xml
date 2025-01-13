@@ -5,10 +5,17 @@
         <group>
             <file>file:/D:/Sem%205/MerchShop/web/inventory.jsp</file>
             <file>file:/D:/Sem%205/MerchShop/web/staffLogin.jsp</file>
-            <file>file:/D:/Sem%205/MerchShop/web/login.jsp</file>
+            <file>file:/D:/Sem%205/MerchShop/src/java/com/WEB/ManagerServlet.java</file>
+            <file>file:/D:/Sem%205/MerchShop/src/java/com/WEB/LogoutServlet.java</file>
+            <file>file:/D:/Sem%205/MerchShop/src/java/com/WEB/RegisterServlet.java</file>
+            <file>file:/D:/Sem%205/MerchShop/src/java/com/WEB/StaffServlet.java</file>
             <file>file:/D:/Sem%205/MerchShop/web/stockForm.jsp</file>
             <file>file:/D:/Sem%205/MerchShop/web/register.jsp</file>
+            <file>file:/D:/Sem%205/MerchShop/src/java/com/DAO/StaffDAO.java</file>
+            <file>file:/D:/Sem%205/MerchShop/web/login.jsp</file>
+            <file>file:/D:/Sem%205/MerchShop/web/WEB-INF/web.xml</file>
             <file>file:/D:/Sem%205/MerchShop/web/profile.jsp</file>
+            <file>file:/D:/Sem%205/MerchShop/src/java/com/Model/Staff.java</file>
         </group>
     </open-files>
 </project-private>

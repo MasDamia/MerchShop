@@ -1,10 +1,4 @@
-<%-- 
-    Document   : register
-    Created on : 12 Jan 2025, 2:45:58 pm
-    Author     : masda
---%>
 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

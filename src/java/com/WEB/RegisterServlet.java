@@ -1,4 +1,3 @@
-
 package com.WEB;
 
 import java.io.IOException;
@@ -41,12 +40,13 @@ public class RegisterServlet extends HttpServlet {
         boolean isRegistered = staffDAO.registerStaff(staff);
 
         if (isRegistered) {
-            request.setAttribute("staff", staff);
+            HttpSession session = request.getSession();
+            session.setAttribute("staff", staff);
             response.sendRedirect("profile.jsp"); // Redirect to a profile page
         } else {
             request.setAttribute("errorMessage", "Registration failed. Please try again.");
             request.getRequestDispatcher("register.jsp").forward(request, response);
         }
-        
+
     }
 }

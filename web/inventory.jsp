@@ -49,7 +49,7 @@
                 border-radius: 10px;
             }
             .nav-item a.active {
-                background-color: #f7e9dc; /* Beige for active tab */
+                background-color: #bebdb9;
             }
             .user-icon {
                 border-radius: 50%;
@@ -112,7 +112,7 @@
 
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Merchandise Shop</a>
+                <a class="navbar-brand">Merchandise Shop</a>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
@@ -123,18 +123,37 @@
                         </li>
                     </ul>
                 </div>
-                <div class="user-icon">
-                    <span>👤</span>
+                <div class="dropdown">
+                    <div class="user-icon dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        👤
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item" href="LogoutServlet">Logout</a></li>
+                    </ul>
                 </div>
+
             </div>
         </nav>
 
         <div class="container">
             <h3>Inventory</h3>
 
-            <div class="btn-new">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <input type="text" id="search" placeholder="Search inventory..." class="form-control" style="width: 300px;">
+
                 <a href="<%= request.getContextPath()%>/new" class="btn btn-secondary">New</a>
             </div>
+
+            <script>
+                document.getElementById("search").addEventListener("input", function () {
+                    const searchValue = this.value.toLowerCase();
+                    const rows = document.querySelectorAll("tbody tr");
+                    rows.forEach(row => {
+                        const name = row.children[0].textContent.toLowerCase();
+                        row.style.display = name.includes(searchValue) ? "" : "none";
+                    });
+                });
+            </script>
 
             <table class="table">
                 <thead>

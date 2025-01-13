@@ -1,8 +1,3 @@
-<%-- 
-    Document   : login
-    Created on : 11 Jan 2025, 9:12:52 pm
-    Author     : masda
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

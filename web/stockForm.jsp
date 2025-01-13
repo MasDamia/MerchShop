@@ -51,7 +51,7 @@
                 border-radius: 10px;
                 padding: 20px;
             }
-            
+
             .container {
                 max-width: 600px;
                 margin: 50px auto;
@@ -117,7 +117,7 @@
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Merchandise Shop</a>
+                <a class="navbar-brand">Merchandise Shop</a>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
@@ -128,8 +128,13 @@
                         </li>
                     </ul>
                 </div>
-                <div class="user-icon">
-                    <span>👤</span>
+                <div class="dropdown">
+                    <div class="user-icon dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        👤
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item" href="LogoutServlet">Logout</a></li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -149,30 +154,25 @@
                     <c:if test="${stock == null}">
                         <form action="insert" method="post">
                         </c:if>
-                        <!-- Form Title -->
+
                         <h2>
                             <c:if test="${stock != null}">Update Stock</c:if>
                             <c:if test="${stock == null}">Add New Stock</c:if>
                             </h2>
 
-                            <!-- Hidden Field for Stock ID (Update Only) -->
                         <c:if test="${stock != null}">
                             <input type="hidden" name="stockID" value="<c:out value="${stock.stockID}" />" />
                         </c:if>
 
-                        <!-- Product Name Field -->
                         <label for="stockName">Product Name</label>
                         <input type="text" id="stockName" name="stockName" value="<c:out value="${stock.stockName}" />" maxlength="100" required placeholder="Enter product name" />
 
-                        <!-- Price Field -->
                         <label for="stockPrice">Price Per Unit</label>
                         <input type="text" id="stockPrice" name="stockPrice" value="<c:out value="${stock.stockPrice}" />" required placeholder="0.00" />
 
-                        <!-- Quantity Field -->
                         <label for="stockQtt">Stock Quantity</label>
                         <input type="number" id="stockQtt" name="stockQtt" value="<c:out value="${stock.stockQtt}" />" min="0" required placeholder="Enter quantity" />
 
-                        <!-- Submit Button -->
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
             </div>

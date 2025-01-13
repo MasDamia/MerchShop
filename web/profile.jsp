@@ -1,11 +1,7 @@
-<%-- 
-    Document   : profile
-    Created on : 12 Jan 2025, 2:48:06 pm
-    Author     : masda
---%>
 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="com.Model.Staff" %>
+<%@page session="true" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,7 +13,7 @@
                 background-color: #f7e9dc; /* Beige background */
                 font-family: Arial, sans-serif;
             }
-            
+
             .header {
                 background-color: #ffc0cb; /* Light pink */
                 padding: 15px;
@@ -39,20 +35,25 @@
                 font-weight: bold;
             }
         </style>
-
     </head>
     <body>
         <div class="header">
             Merchandise Shop
         </div>
+        <%
+            Staff staff = (Staff) session.getAttribute("staff");
+            if (staff == null) {
+                response.sendRedirect("register.jsp");
+            }
+        %>
         <div class="card bg-light">
             <div class="card-body">
                 <h5 class="card-title text-center">Registration Succesful!</h5>
                 <p class="card-text">
-                    <strong>Email Address:</strong>
+                    <strong>Email Address:</strong> <%= staff.getEmailAddress() %>
                 </p>
                 <p class="card-text">
-                    <strong>Username:</strong> 
+                    <strong>Username:</strong> <%= staff.getUsername() %>
                 </p>
                 <div class="d-flex justify-content-center">
                     <a href="staffLogin.jsp" class="btn btn-primary">Go to Login</a>
