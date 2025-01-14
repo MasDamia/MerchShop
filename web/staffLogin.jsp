@@ -65,7 +65,7 @@
         <div class="form-container">
             <h2 class="title">Login</h2>
             <p class="subtext">Don't have an account? <a href="register.jsp">Register here</a></p>
-            <form action="StaffServlet" method="post">
+            <form action="login" method="post">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" required>

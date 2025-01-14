@@ -59,7 +59,7 @@
         <div class="form-container">
             <h2 class="title">Create New Account</h2>
             <p class="subtext">Already Registered? <a href="staffLogin.jsp">Login</a></p>
-            <form action="RegisterServlet" method="post">
+            <form action="register" method="post">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" required>
