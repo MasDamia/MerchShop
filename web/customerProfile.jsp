@@ -1,6 +1,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.Model.Staff" %>
+<%@page import="com.Model.Customer" %>
 <%@page session="true" %>
 <!DOCTYPE html>
 <html>
@@ -41,22 +41,22 @@
             Merchandise Shop
         </div>
         <%
-            Staff staff = (Staff) session.getAttribute("staff");
-            if (staff == null) {
-                response.sendRedirect("staffRegister.jsp");
+            Customer customer = (Customer) session.getAttribute("customer");
+            if (customer == null) {
+                response.sendRedirect("customerRegister.jsp");
             }
         %>
         <div class="card bg-light">
             <div class="card-body">
                 <h5 class="card-title text-center">Registration Successful!</h5>
                 <p class="card-text">
-                    <strong>Email Address:</strong> <%= staff.getEmailAddress() %>
+                    <strong>Email Address:</strong> <%= customer.getEmailAddress() %>
                 </p>
                 <p class="card-text">
-                    <strong>Username:</strong> <%= staff.getUsername() %>
+                    <strong>Username:</strong> <%= customer.getUsername() %>
                 </p>
                 <div class="d-flex justify-content-center">
-                    <a href="staffLogin.jsp" class="btn btn-primary">Go to Login</a>
+                    <a href="customerLogin.jsp" class="btn btn-primary">Go to Login</a>
                 </div>
             </div>
         </div>

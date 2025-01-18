@@ -8,15 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
-import com.DAO.StaffDAO;
-import com.Model.Staff;
+import com.DAO.CustomerDAO;
+import com.Model.Customer;
 
-public class StaffController extends HttpServlet {
+public class CustomerController extends HttpServlet {
 
-    private StaffDAO staffDAO;
+    private CustomerDAO customerDAO;
 
     public void init() {
-        staffDAO = new StaffDAO();
+        customerDAO = new CustomerDAO();
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -30,14 +30,12 @@ public class StaffController extends HttpServlet {
 
         try {
             switch (action) {
-                case "/register":
+                case "/CustomerRegister":
                     register(request, response);
                     break;
-                case "/login":
+                case "/CustomerLogin":
                     login(request, response);
                     break;
-                case "/logout":
-                    logout(request, response);
             }
         } catch (SQLException ex) {
             throw new ServletException(ex);
@@ -57,20 +55,20 @@ public class StaffController extends HttpServlet {
         String password = request.getParameter("password");
         String emailAddress = request.getParameter("emailAddress");
 
-        Staff staff = new Staff();
-        staff.setUsername(username);
-        staff.setPassword(password);
-        staff.setEmailAddress(emailAddress);
+        Customer customer = new Customer();
+        customer.setUsername(username);
+        customer.setPassword(password);
+        customer.setEmailAddress(emailAddress);
 
-        boolean isRegistered = staffDAO.registerStaff(staff);
+        boolean isRegistered = customerDAO.registerCustomer(customer);
 
         if (isRegistered) {
             HttpSession session = request.getSession();
-            session.setAttribute("staff", staff);
-            response.sendRedirect("staffProfile.jsp"); // Redirect to a profile page
+            session.setAttribute("customer", customer);
+            response.sendRedirect("customerProfile.jsp"); // Redirect to a profile page
         } else {
             request.setAttribute("errorMessage", "Registration failed. Please try again.");
-            request.getRequestDispatcher("staffRegister.jsp").forward(request, response);
+            request.getRequestDispatcher("customerRegister.jsp").forward(request, response);
         }
     }
 
@@ -80,29 +78,15 @@ public class StaffController extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        Staff staff = staffDAO.validateStaff(username, password);
+        Customer customer = customerDAO.validateCustomer(username, password);
 
-        if (staff != null) {
+        if (customer != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("staff", staff);
-            response.sendRedirect("listStock"); // Redirect to inventory dashboard
+            session.setAttribute("customer", customer);
+            response.sendRedirect("orders"); // Redirect to orders dashboard
         } else {
             request.setAttribute("errorMessage", "Invalid username or password");
-            request.getRequestDispatcher("staffLogin.jsp").forward(request, response);
+            request.getRequestDispatcher("customerLogin.jsp").forward(request, response);
         }
-    }
-
-    private void logout(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException, ServletException {
-        HttpSession session = request.getSession(false); // Prevent creating a new session if none exists
-        String redirectPage = "staffLogin.jsp"; // Default redirection
-
-        if (session != null) {
-            if (session.getAttribute("manager") != null) {
-                redirectPage = "managerLogin.jsp"; // Manager login page
-            }
-            session.invalidate(); // Invalidate the session
-        }
-        response.sendRedirect(redirectPage); // Redirect to the correct login page
     }
 }

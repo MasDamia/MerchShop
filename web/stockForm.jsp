@@ -1,8 +1,3 @@
-<%-- 
-    Document   : stockForm
-    Created on : 12 Jan 2025, 5:01:28 pm
-    Author     : masda
---%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.DAO;
 
 import java.sql.Connection;
@@ -12,10 +9,6 @@ import java.sql.SQLException;
 
 import com.Model.Manager;
 
-/**
- *
- * @author masda
- */
 public class ManagerDAO {
 
     Connection connection = null;

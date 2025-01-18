@@ -1,30 +1,29 @@
 
 package com.Model;
 
-public class Staff {
-    protected int staffID;
+public class Customer {
+    protected int customerID;
     protected String username;
     protected String password;
     protected String emailAddress;
     
-    public Staff() {
+    public Customer() {
         
     }
 
-    public Staff(int staffID, String username, String password, String emailAddress) {
-        super();
-        this.staffID = staffID;
+    public Customer(int customerID, String username, String password, String emailAddress) {
+        this.customerID = customerID;
         this.username = username;
         this.password = password;
         this.emailAddress = emailAddress;
     }
 
-    public int getStaffID() {
-        return staffID;
+    public int getCustomerID() {
+        return customerID;
     }
 
-    public void setStaffID(int staffID) {
-        this.staffID = staffID;
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
     public String getUsername() {

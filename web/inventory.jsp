@@ -1,8 +1,4 @@
-<%-- 
-    Document   : inventory
-    Created on : 11 Jan 2025, 11:37:45 pm
-    Author     : masda
---%>
+
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>

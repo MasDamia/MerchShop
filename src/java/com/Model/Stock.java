@@ -2,16 +2,17 @@
 package com.Model;
 
 public class Stock {
-    private int stockID;
-    private String stockName;
-    private int stockQtt;
-    private double stockPrice;
+    protected int stockID;
+    protected String stockName;
+    protected int stockQtt;
+    protected double stockPrice;
     
     public Stock() {
         
     }
 
     public Stock(int stockID, String stockName, int stockQtt, double stockPrice) {
+        super();
         this.stockID = stockID;
         this.stockName = stockName;
         this.stockQtt = stockQtt;
@@ -19,6 +20,7 @@ public class Stock {
     }
 
     public Stock(String stockName, int stockQtt, double stockPrice) {
+        super();
         this.stockName = stockName;
         this.stockQtt = stockQtt;
         this.stockPrice = stockPrice;

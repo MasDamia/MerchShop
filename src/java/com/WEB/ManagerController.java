@@ -12,7 +12,7 @@ import com.DAO.ManagerDAO;
 import com.Model.Manager;
 import javax.servlet.http.HttpSession;
 
-public class ManagerServlet extends HttpServlet{
+public class ManagerController extends HttpServlet{
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

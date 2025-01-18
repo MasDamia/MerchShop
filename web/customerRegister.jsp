@@ -6,7 +6,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Merchandise Shop</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/styles.css">
         <style>
             body {
                 background-color: #f7e9dc; /* Beige background */
@@ -30,7 +29,7 @@
                 border-radius: 10px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
-            .btn-login {
+            .btn-register {
                 background-color: black;
                 color: white;
                 border: none;
@@ -38,7 +37,7 @@
                 padding: 10px;
                 font-weight: bold;
             }
-            .btn-login:hover {
+            .btn-register:hover {
                 background-color: #444;
             }
             .title {
@@ -58,22 +57,27 @@
             Merchandise Shop
         </div>
         <div class="form-container">
-            <form action="ManagerController" method="post">
+            <h2 class="title">Create New Account</h2>
+            <p class="subtext">Already Registered? <a href="customerLogin.jsp">Login</a></p>
+            <form action="CustomerRegister" method="post">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" required>
                 </div>
                 <div class="mb-3">
+                    <label for="emailAddress" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="emailAddress" name="emailAddress" required>
+                </div>
+                <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
-                <button type="submit" class="btn btn-login">Login</button>
+                <button type="submit" class="btn btn-register">Register</button>
             </form>
-            <p style="color: red;">
-                <% String errorMessage = (String) request.getAttribute("errorMessage");%>
-                <%= errorMessage != null ? errorMessage : ""%>
-            </p>
         </div>
+        <p style="color: red;">
+            <% String errorMessage = (String) request.getAttribute("errorMessage");%>
+            <%= errorMessage != null ? errorMessage : ""%>
+        </p>
     </body>
 </html>
-

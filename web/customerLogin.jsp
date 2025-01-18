@@ -58,7 +58,9 @@
             Merchandise Shop
         </div>
         <div class="form-container">
-            <form action="ManagerController" method="post">
+            <h2 class="title">Login</h2>
+            <p class="subtext">Don't have an account? <a href="customerRegister.jsp">Register here</a></p>
+            <form action="CustomerLogin" method="post">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" required>
@@ -69,11 +71,10 @@
                 </div>
                 <button type="submit" class="btn btn-login">Login</button>
             </form>
-            <p style="color: red;">
-                <% String errorMessage = (String) request.getAttribute("errorMessage");%>
-                <%= errorMessage != null ? errorMessage : ""%>
-            </p>
         </div>
+        <p style="color: red;">
+            <% String errorMessage = (String) request.getAttribute("errorMessage");%>
+            <%= errorMessage != null ? errorMessage : ""%>
+        </p>
     </body>
 </html>
-

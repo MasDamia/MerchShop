@@ -1,30 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>ManagerServlet</servlet-name>
-        <servlet-class>com.WEB.ManagerServlet</servlet-class>
+        <servlet-name>ManagerController</servlet-name>
+        <servlet-class>com.WEB.ManagerController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>com.WEB.LogoutServlet</servlet-class>
+        <servlet-name>StaffController</servlet-name>
+        <servlet-class>com.WEB.StaffController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RegisterController</servlet-name>
-        <servlet-class>com.WEB.RegisterController</servlet-class>
+        <servlet-name>CustomerController</servlet-name>
+        <servlet-class>com.WEB.CustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StockController</servlet-name>
+        <servlet-class>com.WEB.StockController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrdersController</servlet-name>
+        <servlet-class>com.WEB.OrdersController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>RegisterController</servlet-name>
+        <servlet-name>StaffController</servlet-name>
         <url-pattern>/register</url-pattern>
         <url-pattern>/login</url-pattern>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ManagerServlet</servlet-name>
-        <url-pattern>/ManagerServlet</url-pattern>
+        <servlet-name>ManagerController</servlet-name>
+        <url-pattern>/ManagerController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LogoutServlet</servlet-name>
-        <url-pattern>/LogoutServlet</url-pattern>
+        <servlet-name>CustomerController</servlet-name>
+        <url-pattern>/CustomerRegister</url-pattern>
+        <url-pattern>/CustomerLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StockController</servlet-name>
+        <url-pattern>/new</url-pattern>
+        <url-pattern>/insert</url-pattern>
+        <url-pattern>/delete</url-pattern>
+        <url-pattern>/edit</url-pattern>
+        <url-pattern>/update</url-pattern>
+        <url-pattern>/list</url-pattern>
+        <url-pattern>/orders</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrdersController</servlet-name>
+        <url-pattern>/OrdersController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

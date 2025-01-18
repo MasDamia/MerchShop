@@ -1,17 +1,17 @@
 package com.Model;
 
 public class Manager {
-    private int managerID;
-    private String username;
-    private String password;
-    private String emailAddress;
+    protected int managerID;
+    protected String username;
+    protected String password;
+    protected String emailAddress;
 
-    //Constructor
     public Manager() {
 
     }
 
     public Manager(int managerID, String username, String password, String emailAddress) {
+        super();
         this.managerID = managerID;
         this.username = username;
         this.password = password;
