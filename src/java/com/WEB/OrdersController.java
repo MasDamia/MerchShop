@@ -1,4 +1,3 @@
-
 package com.WEB;
 
 import javax.servlet.*;
@@ -8,50 +7,69 @@ import java.util.List;
 
 import com.Model.Orders;
 import com.DAO.OrdersDAO;
+import com.DAO.StockDAO;
+import java.util.Date;
+import java.util.ArrayList;
 
 public class OrdersController extends HttpServlet {
+
     private OrdersDAO ordersDAO;
-    
+    private StockDAO stockDAO;
+
     public void init() {
         ordersDAO = new OrdersDAO();
-    }
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        int customerID = Integer.parseInt(request.getParameter("customerID"));
-        List<Orders> orders = ordersDAO.getOrdersByCustomer(customerID);
-        request.setAttribute("orders", orders);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("orders.jsp");
-        dispatcher.forward(request, response);
+        stockDAO = new StockDAO();
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int customerID = Integer.parseInt(request.getParameter("customerID"));
-        int stockID = Integer.parseInt(request.getParameter("stockID"));
-        int orderQtt = Integer.parseInt(request.getParameter("orderQtt"));
-        String address = request.getParameter("address");
+        HttpSession session = request.getSession();
+        Integer customerID = (Integer) session.getAttribute("customerID");
 
-        // Get the stock price from the database 
-        double stockPrice = Double.parseDouble(request.getParameter("stockPrice"));
-        double totalPrice = orderQtt * stockPrice;
-
-        Orders order = new Orders(0, customerID, stockID, orderQtt, totalPrice, new java.util.Date(), address);
-        if (ordersDAO.placeOrder(order)) {
-            // Update stock quantity after order
-            int currentStockQtt = Integer.parseInt(request.getParameter("currentStockQtt"));
-            int newStockQtt = currentStockQtt - orderQtt;
-            ordersDAO.updateStockQuantity(stockID, newStockQtt);
+        if (customerID == null) {
+            response.sendRedirect("customerLogin.jsp");
+            return;
         }
 
-        response.sendRedirect("displayItem.jsp");
+        List<Orders> ordersList = new ArrayList<>();
+
+        String[] stockIDs = request.getParameterValues("stockID");
+
+        for (String stockIdStr : stockIDs) {
+            int stockID = Integer.parseInt(stockIdStr);
+            int orderQtt = Integer.parseInt(request.getParameter("orderQtt" + stockID));
+            double stockPrice = stockDAO.getStockPriceById(stockID);
+            double totalPrice = stockPrice * orderQtt;
+
+            Orders order = new Orders();
+            order.setCustomerID(customerID);
+            order.setStockID(stockID);
+            order.setOrderQtt(orderQtt);
+            order.setTotalPrice(totalPrice);
+            order.setStockName(stockDAO.getStockNameById(stockID));
+            order.setOrderDate(new Date()); // Set the current date as the order date
+            ordersList.add(order);
+        }
+
+        ordersDAO.placeOrder(ordersList);
+
+        request.setAttribute("ordersList", ordersList);
+        request.getRequestDispatcher("checkout.jsp").forward(request, response);
+
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Orders> ordersList = ordersDAO.getAllOrders();
+
+        for (Orders order : ordersList) {
+            System.out.println(order);
+        }
+
+        request.setAttribute("ordersList", ordersList);
+        request.getRequestDispatcher("viewOrder.jsp").forward(request, response);
     }
 
 }

@@ -65,6 +65,7 @@ public class CustomerController extends HttpServlet {
         if (isRegistered) {
             HttpSession session = request.getSession();
             session.setAttribute("customer", customer);
+            session.setAttribute("customerID", customer.getCustomerID()); 
             response.sendRedirect("customerProfile.jsp"); // Redirect to a profile page
         } else {
             request.setAttribute("errorMessage", "Registration failed. Please try again.");
@@ -83,7 +84,8 @@ public class CustomerController extends HttpServlet {
         if (customer != null) {
             HttpSession session = request.getSession();
             session.setAttribute("customer", customer);
-            response.sendRedirect("orders"); // Redirect to orders dashboard
+            session.setAttribute("customerID", customer.getCustomerID()); 
+            response.sendRedirect("displayItem"); // Redirect to orders dashboard
         } else {
             request.setAttribute("errorMessage", "Invalid username or password");
             request.getRequestDispatcher("customerLogin.jsp").forward(request, response);

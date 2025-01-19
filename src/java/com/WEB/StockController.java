@@ -51,7 +51,7 @@ public class StockController extends HttpServlet {
                 case "/list":
                     listStock(request, response);
                     break;
-                case "/orders":
+                case "/displayItem":
                     displayItem(request, response);
                 default:
                     listStock(request, response);

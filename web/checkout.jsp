@@ -2,37 +2,41 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Checkout</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
-        <h3>Checkout</h3>
-        <form action="placeOrder" method="POST">
-            <table class="table">
+    <head>
+        <title>Checkout</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container mt-5">
+            <h3 class="text-center">Order Confirmation</h3>
+            <hr>
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Item</th>
+                        <th>Product Name</th>
                         <th>Quantity</th>
-                        <th>Total Price</th>
+                        <th>Total Price (RM)</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="order" items="${orders}">
+                    <c:forEach items="${ordersList}" var="order">
                         <tr>
-                            <td>${order.stockName}</td>
-                            <td>${order.orderQtt}</td>
-                            <td>RM${order.totalPrice}</td>
+                            <td><c:out value="${order.stockName}"/></td>
+                            <td><c:out value="${order.orderQtt}"/></td>
+                            <td><c:out value="${order.totalPrice}"/></td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
-            <label for="address">Shipping Address:</label>
-            <input type="text" id="address" name="address" required />
-            <button type="submit" class="btn btn-success">Complete Order</button>
-        </form>
-    </div>
-</body>
+            <br>
+            <div class="text-center">
+                <a href="<%=request.getContextPath()%>/displayItem" class="btn btn-primary">Back To Menu</a>
+            </div>
+            <br>
+            <div class="text-center">
+                <a href="orderSuccess.jsp" class="btn btn-primary">Pay</a>
+            </div>
+        </div>
+    </body>
 </html>
 

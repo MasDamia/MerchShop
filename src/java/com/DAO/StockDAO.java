@@ -24,7 +24,9 @@ public class StockDAO {
     private static final String SELECT_ALL_STOCKS = "select * from Stock";
     private static final String DELETE_STOCKS_SQL = "delete from Stock where stockID = ?";
     private static final String UPDATE_STOCKS_SQL = "update Stock set stockName = ?, stockQtt = ?, stockPrice = ? where stockID=?";
-
+    private static final String SELECT_STOCKPRICE_BY_ID = "SELECT stockPrice FROM Stock WHERE stockID=?";
+    private static final String SELECT_STOCKNAME_BY_ID = "SELECT stockName FROM Stock WHERE stockID=?";
+    
     public StockDAO() {
 
     }
@@ -127,6 +129,36 @@ public class StockDAO {
             rowUpdated = statement.executeUpdate() > 0;
         }
         return rowUpdated;
+    }
+    
+    public double getStockPriceById(int stockID) {
+        double stockPrice = 0.0;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_STOCKPRICE_BY_ID);) {
+            preparedStatement.setInt(1, stockID);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                stockPrice = rs.getDouble("stockPrice");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stockPrice;
+    }
+    
+    public String getStockNameById(int stockID) {
+        String stockName = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_STOCKNAME_BY_ID);) {
+            preparedStatement.setInt(1, stockID);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                stockName = rs.getString("stockName");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stockName;
     }
     
     private void printSQLException(SQLException ex) {

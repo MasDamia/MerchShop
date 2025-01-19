@@ -14,6 +14,9 @@ public class OrdersDAO {
     private String jdbcUsername = "root";
     private String jdbcPassword = "admin";
     
+    private static final String INSERT_ORDER_SQL = "INSERT INTO orders (customerID, stockID, orderQtt, totalPrice, orderDate, address) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String SELECT_ALL_ORDERS = "SELECT * FROM orders";
+    
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -32,48 +35,52 @@ public class OrdersDAO {
         
     }
     
-    public boolean placeOrder(Orders order) {
-        String query ="INSERT INTO Orders (customerID, stockID, orderQtt, totalPrice, orderDate, address) VALUES (?, ?, ?, ?, ?, ?)";
-         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setInt(1, order.getCustomerID());
-            ps.setInt(2, order.getStockID());
-            ps.setInt(3, order.getOrderQtt());
-            ps.setDouble(4, order.getTotalPrice());
-            ps.setDate(5, new java.sql.Date(order.getOrderDate().getTime()));
-            ps.setString(6, order.getAddress());
-            return ps.executeUpdate() > 0;
+    public void placeOrder(List<Orders> ordersList) {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ORDER_SQL);
+            
+            for (Orders order : ordersList) {
+                preparedStatement.setInt(1, order.getCustomerID());
+                preparedStatement.setInt(2, order.getStockID());
+                preparedStatement.setInt(3, order.getOrderQtt());
+                preparedStatement.setDouble(4, order.getTotalPrice());
+                preparedStatement.setDate(5, new java.sql.Date(order.getOrderDate().getTime()));
+                preparedStatement.setString(6, order.getAddress());
+                preparedStatement.addBatch();
+            }
+            
+            preparedStatement.executeBatch();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
     }
-    
-    public List<Orders> getOrdersByCustomer(int customerID) {
-        List<Orders> orders = new ArrayList<>();
-        String query = "SELECT o.orderID, o.custID, o.stockID, o.orderQtt, o.totalPrice, o.orderDate, o.address, s.stockName FROM Orders o JOIN Stock s ON o.stockID = s.stockID WHERE o.custID = ?";
-        try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setInt(1, customerID);
-            ResultSet rs = ps.executeQuery();
+
+    public List<Orders> getAllOrders() {
+        List<Orders> ordersList = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ORDERS)) {
+            ResultSet rs = preparedStatement.executeQuery();
+
             while (rs.next()) {
-                Orders order = new Orders(
-                        rs.getInt("orderID"),
-                        rs.getInt("custID"),
-                        rs.getInt("stockID"),
-                        rs.getInt("orderQtt"),
-                        rs.getDouble("totalPrice"),
-                        rs.getDate("orderDate"),
-                        rs.getString("address"),
-                        rs.getString("stockName")
-                );
-                orders.add(order);
+                int orderID = rs.getInt("orderID");
+                int customerID = rs.getInt("customerID");
+                int stockID = rs.getInt("stockID");
+                int orderQtt = rs.getInt("orderQtt");
+                double totalPrice = rs.getDouble("totalPrice");
+                Date orderDate = rs.getDate("orderDate");
+                String address = rs.getString("address");
+    
+                Orders order = new Orders(orderID, customerID, stockID, orderQtt, totalPrice, orderDate, address);
+                ordersList.add(order);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return orders;
+        return ordersList;
     }
     
-    public boolean updateStockQuantity(int stockID, int newQuantity) {
+    /*public boolean updateStockQuantity(int stockID, int newQuantity) {
         String query = "UPDATE Stock SET stockQtt = ? WHERE stockID = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, newQuantity);
@@ -83,5 +90,5 @@ public class OrdersDAO {
             e.printStackTrace();
         }
         return false;
-    }
+    }*/
 }
