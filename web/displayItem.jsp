@@ -4,29 +4,68 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Order Page</title>
+        <title>Merchandise Shop</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <style>
+            body {
+                background-color: #f5e4da;
+            }
+            .navbar {
+                background-color: #ffd9e0;
+            }
+            .navbar-brand {
+                font-weight: bold;
+            }
+            .card {
+                background-color: #fbeee6;
+                border: none;
+            }
+            .card img {
+                width: 100%;
+                height: 150px;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+            .price {
+                font-weight: bold;
+                color: #333;
+            }
+            .quantity {
+                text-align: center;
+                margin-top: 10px;
+            }
+            .action-icons {
+                margin-top: 10px;
+                display: flex;
+                justify-content: space-between;
+            }
+        </style>
     </head>
     <body>
-        <div class="container mt-5">
-            <h3 class="text-center">Merchandise Shop</h3>
-            <hr>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Merchandise Shop</a>
+                <div class="d-flex">
+                    <span>Welcome!</span>
+                    <a href="#" class="ms-3"><img src="user-icon.png" alt="User" style="width: 30px;"></a>
+                    <a href="#" class="ms-3"><img src="cart-icon.png" alt="Cart" style="width: 30px;"></a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container mt-4">
+            <!-- Added form action here -->
             <form action="OrdersController" method="post">
                 <div class="row">
                     <c:forEach items="${listStock}" var="stock">
-                        <div class="col-md-4">
-                            <div class="card mb-4">
-                                <div class="card-body">
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <div class="card-body text-center">
                                     <h5 class="card-title"><c:out value="${stock.stockName}"/></h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">Price: RM<c:out value="${stock.stockPrice}"/></h6>
-
-                                    <div class="form-group">
+                                    <p class="price">RM<c:out value="${stock.stockPrice}"/></p>
+                                    <div class="quantity">
                                         <input type="checkbox" name="stockID" value="${stock.stockID}"> Select
-                                        <input type="number" name="orderQtt${stock.stockID}" value="1" min="1" class="form-control mt-2" placeholder="Quantity">
+                                        <input type="number" name="orderQtt${stock.stockID}" value="1" min="1" class="form-control mt-2">
                                     </div>
                                 </div>
                             </div>
