@@ -11,7 +11,7 @@
                 background-color: #f7e9dc; /* Beige background */
                 font-family: Arial, sans-serif;
             }
-            
+
             .header {
                 background-color: #ffc0cb; /* Light pink */
                 padding: 15px;
@@ -59,7 +59,7 @@
         <div class="form-container">
             <h2 class="title">Create New Account</h2>
             <p class="subtext">Already Registered? <a href="staffLogin.jsp">Login</a></p>
-            <form action="register" method="post">
+            <form action="register" method="post" onsubmit="return validateForm()">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" required>
@@ -72,8 +72,24 @@
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                </div>
                 <button type="submit" class="btn btn-register">Register</button>
             </form>
+            <script>
+                function validateForm() {
+                    const password = document.getElementById("password").value;
+                    const confirmPassword = document.getElementById("confirmPassword").value;
+
+                    if (password !== confirmPassword) {
+                        alert("Passwords do not match!");
+                        return false;
+                    }
+                    return true;
+                }
+            </script>
         </div>
         <p style="color: red;">
             <% String errorMessage = (String) request.getAttribute("errorMessage");%>

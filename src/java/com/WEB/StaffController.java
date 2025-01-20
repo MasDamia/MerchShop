@@ -53,41 +53,48 @@ public class StaffController extends HttpServlet {
     private void register(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String emailAddress = request.getParameter("emailAddress");
-
-        Staff staff = new Staff();
-        staff.setUsername(username);
-        staff.setPassword(password);
-        staff.setEmailAddress(emailAddress);
-
-        boolean isRegistered = staffDAO.registerStaff(staff);
-
-        if (isRegistered) {
-            HttpSession session = request.getSession();
-            session.setAttribute("staff", staff);
-            response.sendRedirect("staffProfile.jsp"); // Redirect to a profile page
-        } else {
-            request.setAttribute("errorMessage", "Registration failed. Please try again.");
-            request.getRequestDispatcher("staffRegister.jsp").forward(request, response);
-        }
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                String confirmPassword = request.getParameter("confirmPassword");
+                String emailAddress = request.getParameter("emailAddress");
+            
+                if (!password.equals(confirmPassword)) {
+                    request.setAttribute("errorMessage", "Passwords do not match.");
+                    request.getRequestDispatcher("staffRegister.jsp").forward(request, response);
+                    return;
+                }
+            
+                Staff staff = new Staff();
+                staff.setUsername(username);
+                staff.setPassword(password);
+                staff.setEmailAddress(emailAddress);
+            
+                boolean isRegistered = staffDAO.registerStaff(staff);
+            
+                if (isRegistered) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("staff", staff);
+                    response.sendRedirect("staffProfile.jsp"); // Redirect to a profile page
+                } else {
+                    request.setAttribute("errorMessage", "Registration failed. Please try again.");
+                    request.getRequestDispatcher("staffRegister.jsp").forward(request, response);
+                }
     }
 
     private void login(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
 
-        String username = request.getParameter("username");
+        String emailAddress = request.getParameter("emailAddress");
         String password = request.getParameter("password");
 
-        Staff staff = staffDAO.validateStaff(username, password);
+        Staff staff = staffDAO.validateStaff(emailAddress, password);
 
         if (staff != null) {
             HttpSession session = request.getSession();
             session.setAttribute("staff", staff);
             response.sendRedirect("listStock"); // Redirect to inventory dashboard
         } else {
-            request.setAttribute("errorMessage", "Invalid username or password");
+            request.setAttribute("errorMessage", "Invalid email or password");
             request.getRequestDispatcher("staffLogin.jsp").forward(request, response);
         }
     }

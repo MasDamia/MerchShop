@@ -11,6 +11,7 @@
             <file>file:/D:/Sem%205/MerchShop/web/WEB-INF/web.xml</file>
             <file>file:/D:/Sem%205/MerchShop/src/java/com/Model/Orders.java</file>
             <file>file:/D:/Sem%205/MerchShop/web/customerLogin.jsp</file>
+            <file>file:/D:/Sem%205/MerchShop/src/java/com/DAO/StockDAO.java</file>
             <file>file:/D:/Sem%205/MerchShop/src/java/com/WEB/CustomerController.java</file>
         </group>
     </open-files>

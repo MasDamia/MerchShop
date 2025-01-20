@@ -48,13 +48,11 @@
                 <div class="d-flex">
                     <span>Welcome!</span>
                     <a href="#" class="ms-3"><img src="user-icon.png" alt="User" style="width: 30px;"></a>
-                    <a href="#" class="ms-3"><img src="cart-icon.png" alt="Cart" style="width: 30px;"></a>
                 </div>
             </div>
         </nav>
 
         <div class="container mt-4">
-            <!-- Added form action here -->
             <form action="OrdersController" method="post">
                 <div class="row">
                     <c:forEach items="${listStock}" var="stock">
@@ -64,7 +62,7 @@
                                     <h5 class="card-title"><c:out value="${stock.stockName}"/></h5>
                                     <p class="price">RM<c:out value="${stock.stockPrice}"/></p>
                                     <div class="quantity">
-                                        <input type="checkbox" name="stockID" value="${stock.stockID}"> Select
+                                        <input type="checkbox" name="stockID" value="${stock.stockID}">
                                         <input type="number" name="orderQtt${stock.stockID}" value="1" min="1" class="form-control mt-2">
                                     </div>
                                 </div>

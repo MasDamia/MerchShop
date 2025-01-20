@@ -1,8 +1,3 @@
-<%-- 
-    Document   : staffLogin
-    Created on : 12 Jan 2025, 2:03:11 pm
-    Author     : masda
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -64,11 +59,11 @@
         </div>
         <div class="form-container">
             <h2 class="title">Login</h2>
-            <p class="subtext">Don't have an account? <a href="register.jsp">Register here</a></p>
+            <p class="subtext">Don't have an account? <a href="staffRegister.jsp">Register here</a></p>
             <form action="login" method="post">
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="email" name="emailAddress" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>

@@ -55,12 +55,12 @@ public class StaffDAO {
         return isRegistered;
     }
     
-    public Staff validateStaff(String username, String password) {
+    public Staff validateStaff(String emailAddress, String password) {
         Staff staff = null;
         try ( Connection connection = getConnection()) {
-            String query = "SELECT * FROM Staff WHERE username = ? AND password = ?";
+            String query = "SELECT * FROM Staff WHERE emailAddress = ? AND password = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, username);
+            preparedStatement.setString(1, emailAddress);
             preparedStatement.setString(2, password);
 
             ResultSet resultSet = preparedStatement.executeQuery();
